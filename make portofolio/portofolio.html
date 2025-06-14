@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Project - Aldi</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body{font-family:'Inter',sans-serif;margin:0;height:100vh;background-color:#000;background-image:url(pic.jpg);background-size:cover;background-position:center;background-attachment:fixed;overflow:hidden;color:#333}
+        .meteor-shower{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1}.meteor{position:absolute;background-color:white;border-radius:50%;width:3px;height:3px;box-shadow:0 0 10px #fff,0 0 20px #fff;animation:jatuh linear infinite}.meteor::after{content:'';display:block;position:absolute;top:50%;right:3px;transform:translateY(-50%);width:200px;height:1px;background:linear-gradient(to left,rgba(255,255,255,0.5),transparent)}@keyframes jatuh{0%{transform:translate(0,-500px) rotate(215deg);opacity:0}5%{opacity:1}100%{transform:translate(-1000px,1000px) rotate(215deg);opacity:0}}.meteor:nth-child(1){top:10%;left:60%;animation-duration:4s;animation-delay:.5s}.meteor:nth-child(2){top:25%;left:80%;animation-duration:3s;animation-delay:1.2s}.meteor:nth-child(3){top:5%;left:40%;animation-duration:5s;animation-delay:2.5s}.meteor:nth-child(4){top:50%;left:90%;animation-duration:3.5s;animation-delay:3.1s}.meteor:nth-child(5){top:-10%;left:70%;animation-duration:4.5s;animation-delay:1.8s}
+        .sidebar-toggle{display:none}.sidebar-toggle-label{position:fixed;top:20px;left:20px;cursor:pointer;z-index:1001;padding:5px;color:white;filter:drop-shadow(0 0 3px rgba(0,0,0,.5))}.sidebar{position:fixed;top:0;left:0;height:100vh;width:280px;background:rgba(10,10,20,.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-right:1px solid rgba(255,255,255,.1);transform:translateX(-100%);transition:transform .4s ease-in-out;z-index:1000;display:flex;flex-direction:column}.sidebar-toggle:checked ~ .sidebar{transform:translateX(0)}.sidebar-main{padding:80px 15px 20px 15px;overflow-y:auto;flex-grow:1}.sidebar-nav ul{list-style:none;padding:0;margin:0}.sidebar-nav li{margin-bottom:5px}.sidebar-nav a{display:flex;align-items:center;gap:20px;padding:12px 15px;border-radius:8px;text-decoration:none;color:#ccc;font-weight:500;font-size:.95em;transition:background-color .2s ease,color .2s ease}.sidebar-nav a:hover{background-color:rgba(255,255,255,.1);color:#fff}.sidebar-nav li.active a{background-color:rgba(255,255,255,.2);color:#fff;font-weight:600}.sidebar-nav svg{width:24px;height:24px;stroke-width:2;stroke:#fff}
+        .main-content{min-height:100vh;position:relative;z-index:5;transition:margin-left .4s ease-in-out;padding:40px 20px;box-sizing:border-box;display:flex;justify-content:center;align-items:center}.sidebar-toggle:checked ~ .main-content{margin-left:280px}
+        .page-content{display:none;width:100%;height:100%;justify-content:center;align-items:center}.page-content.active{display:flex;animation:fadeIn .5s ease-in-out}@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+        .text-container{padding:10px 40px 40px 40px;background:rgba(10,10,20,.85);border-radius:20px;border:1px solid rgba(255,255,255,.1);box-shadow:0 8px 32px 0 rgba(0,0,0,.37);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);max-width:700px;width:90%;color:#E0E0E0;max-height:80vh;overflow-y:auto}.text-container.gallery-page{max-width:1000px}.text-container h2{font-size:2.2em;font-weight:700;margin-top:30px;margin-bottom:20px;text-align:center;color:#fff;text-shadow:1px 1px 5px rgba(0,0,0,.5)}.text-container h3{font-size:1.5em;font-weight:600;color:#F7931A;margin-top:40px;text-align:center}.text-container p{font-size:1.1em;line-height:1.7;color:#ccc;text-align:justify;margin-bottom:1em}.text-container::-webkit-scrollbar{width:8px}.text-container::-webkit-scrollbar-track{background:rgba(255,255,255,.1);border-radius:10px}.text-container::-webkit-scrollbar-thumb{background:#F7931A;border-radius:10px}.text-container::-webkit-scrollbar-thumb:hover{background:#ffae42}
+        .contact-links{margin-top:30px;display:flex;flex-direction:column;gap:15px}.contact-item{display:flex;align-items:center;gap:15px;background:rgba(255,255,255,.05);padding:15px;border-radius:8px;text-decoration:none;color:#ccc;transition:background-color .3s ease}.contact-item:hover{background-color:rgba(255,255,255,.1);color:#fff}.contact-item svg{width:28px;height:28px;stroke:#F7931A}.contact-item span{font-size:1.1em;font-weight:500}
+        .gallery-container{display:flex;justify-content:center;align-items:flex-start;gap:30px;flex-wrap:wrap;margin-top:20px;width:100%}.gallery-item{width: 100%;max-width:80%;text-align:center}.gallery-item img{width:100%;height:auto;border-radius:10px;border:2px solid rgba(255,255,255,.2);box-shadow:0 4px 15px rgba(0,0,0,.2);transition:transform .3s ease,box-shadow .3s ease}.gallery-item img:hover{transform:scale(1.05);box-shadow:0 8px 30px rgba(0,0,0,.3)}.gallery-item h4{margin-top:15px;font-size:1.2em;color:#fff;font-weight:600;text-shadow:1px 1px 3px rgba(0,0,0,.5)}
+        #music-prompt{position:fixed;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,.7);backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);z-index:9999;display:flex;justify-content:center;align-items:center;transition:opacity .5s ease}.prompt-box{background:rgba(30,30,40,.9);padding:40px;border-radius:15px;text-align:center;color:#fff;border:1px solid rgba(255,255,255,.2);box-shadow:0 10px 30px rgba(0,0,0,.5)}.prompt-box h2{margin-top:0;font-size:1.8em}.prompt-box p{margin-bottom:30px;color:#ccc;text-align:center}.prompt-buttons{display:flex;gap:20px;justify-content:center}.prompt-buttons button{padding:12px 30px;border:none;border-radius:8px;font-size:1em;font-weight:600;cursor:pointer;transition:transform .2s ease,background-color .2s ease}.prompt-buttons button:hover{transform:scale(1.05)}#play-music{background-color:#F7931A;color:#111}#play-music:hover{background-color:#ffae42}#no-music{background-color:#555;color:#fff}#no-music:hover{background-color:#777}#music-prompt.hidden{opacity:0;pointer-events:none}
+        .sidebar-footer {margin-top: auto;padding: 20px;border-top: 1px solid rgba(255, 255, 255, 0.1);display: flex;align-items: center;gap: 15px;}
+        #volume-toggle {background: none; border: none; cursor: pointer;padding: 5px; color: #ccc; transition: color .2s ease;}
+        #volume-toggle:hover { color: #fff; }
+        #volume-toggle svg { width: 24px; height: 24px; }
+        .icon-volume-off { display: none; }
+        #volume-toggle.muted .icon-volume-off { display: block; }
+        #volume-toggle.muted .icon-volume-on { display: none; }
+        #volume-slider {width: 100%; cursor: pointer;-webkit-appearance: none; appearance: none;background: transparent;}
+        #volume-slider::-webkit-slider-runnable-track { height: 4px; background: rgba(255, 255, 255, 0.2); border-radius: 5px; }
+        #volume-slider::-webkit-slider-thumb {-webkit-appearance: none; appearance: none;margin-top: -6px;width: 16px; height: 16px;background: #fff; border-radius: 50%;transition: background .2s ease;}
+        #volume-slider:hover::-webkit-slider-thumb { background: #F7931A; }
+
+    </style>
+</head>
+<body>
+    <div id="music-prompt">
+        <div class="prompt-box">
+            <h2>Welcome</h2>
+            <p>Play background music for the best experience?</p>
+            <div class="prompt-buttons">
+                <button id="play-music">Yes, Play Music</button>
+                <button id="no-music">No, Thanks</button>
+            </div>
+        </div>
+    </div>
+    <audio id="background-music" loop>
+        <source src="wildwestls.mp3" type="audio/mpeg">
+    </audio>
+    <input type="checkbox" id="sidebar-toggle" class="sidebar-toggle">
+    <label for="sidebar-toggle" class="sidebar-toggle-label">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+    </label>
+    <aside class="sidebar">
+        <div class="sidebar-main">
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#" data-target="about-me"><svg viewBox="0 0 24 24"><circle fill="none" stroke="currentColor" cx="12" cy="7" r="4"></circle><path fill="none" stroke="currentColor" d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"></path></svg> <span>About Me</span> </a></li>
+                    <li><a href="#" data-target="project-release"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline fill="none" stroke="currentColor" points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line fill="none" stroke="currentColor" x1="12" y1="22.08" x2="12" y2="12"></line></svg> <span>Project Release</span> </a></li>
+                    <li><a href="#" data-target="coming-soon"><svg viewBox="0 0 24 24"><circle fill="none" stroke="currentColor" cx="12" cy="12" r="10"></circle><polyline fill="none" stroke="currentColor" points="12 6 12 12 16 14"></polyline></svg> <span>Coming Soon</span> </a></li>
+                    <li><a href="#" data-target="contact"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline fill="none" stroke="currentColor" points="22,6 12,13 2,6"></polyline></svg> <span>Contact</span> </a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="sidebar-footer">
+            <button id="volume-toggle" title="Mute / Unmute">
+                <svg class="icon-volume-on" viewBox="0 0 24 24"><polygon fill="none" stroke="currentColor" points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path fill="none" stroke="currentColor" d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                <svg class="icon-volume-off" viewBox="0 0 24 24"><polygon fill="none" stroke="currentColor" points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line fill="none" stroke="currentColor" x1="23" y1="9" x2="17" y2="15"></line><line fill="none" stroke="currentColor" x1="17" y1="9" x2="23" y2="15"></line></svg>
+            </button>
+            <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.5">
+        </div>
+    </aside>
+    
+    <div class="meteor-shower">
+        <div class="meteor"></div><div class="meteor"></div><div class="meteor"></div><div class="meteor"></div><div class="meteor"></div>
+    </div>
+
+    <main class="main-content">
+        <div id="about-me" class="page-content">
+            <div class="text-container">
+                <h2>About Me</h2>
+                <p>I am a beginner, full of passion and enthusiasm to dive into the world of technology, especially in the Web2 and Web3 spaces. Although I have no prior experience in these fields, I possess a great curiosity and strong motivation to continuously learn and grow.</p>
+                <p>My interest in Web2 began with a fascination for how applications, websites, and digital systems can shape efficient and engaging user experiences. Meanwhile, the world of Web3 captured my attention with its potential to create more decentralized, transparent, and secure systems through technologies like blockchain, smart contracts, and crypto.</p>
+                <p>I realize this journey is not easy, especially coming from a non-technical background. However, I believe that with consistent learning, hands-on practice, and a willingness to keep exploring, I can catch up and build a strong foundation.</p>
+                <p>Currently, I am actively learning the fundamentals of programming, web development, and the core concepts of the blockchain and Web3 world. My future goal is to make a tangible contribution to the digital community—whether as a developer, a creator, or part of a team building the future of the internet.</p>
+                <p>I am open to collaboration, mentorship, and any opportunity that can enrich my learning journey in the worlds of Web2 and Web3.</p>
+                <h3>I Will Not Stop</h3>
+                <p>I will not stop what I have started. This journey is not just an ordinary step—it is a commitment, a promise to myself that as long as I am alive, I will keep walking, keep learning, and keep fighting.</p>
+                <p>If one day I stop, it only means one thing: I am no longer in this world. Because as long as I still breathe, I believe that every idea, every effort, and every small step can bring about change—both for myself and for others.</p>
+                <p>I know this path is not always easy. There will be obstacles, doubts, and even failures. But none of that will stop me. On the contrary, it will only strengthen my resolve.</p>
+                <p>In the future, I hope the projects I build—no matter how small—can provide real benefits. I want my work to be not just proof that I tried, but also something that can help many people, make their lives easier, or even inspire their own journeys.</p>
+                <p>The "Coming Soon" page will feature additional streaming for anime and games, which I hope can also be part of my contribution to a broader digital community.</p>
+                <p>This is just the beginning. And I will not stop here.</p>
+                <h3>Solo, But Not Alone</h3>
+                <p>I am working on this project by myself. Without a team, without technical support from anyone—just me, my ideas, and a will that never fades.</p>
+                <p>Every line of code, every design, every decision—I learned and executed them all on my own. It's not because I want to seem great, but because I believe a dream doesn't have to wait for a big team to begin. Sometimes, all you need is one person who truly believes.</p>
+                <p>I am aware this journey is not easy. Fatigue, confusion, and even the urge to give up often appear. But I always return to one thing: the reason why I started.</p>
+                <p>I believe that one day, the result of all this will be able to help many people. This project is not just about proving my own abilities, but about creating something useful—even if it started from scratch, and was built by one person alone.</p>
+                <p>I may be solo in the process, but I never feel alone in spirit.</p>
+            </div>
+        </div>
+        <div id="project-release" class="page-content">
+            <div class="text-container">
+                <h2>Project Release</h2>
+            </div>
+        </div>
+        <div id="coming-soon" class="page-content">
+            <div class="text-container gallery-page">
+                <h2>Coming Soon</h2>
+                <p style="text-align: center;">Here are some projects I'm preparing for a future release. Stay tuned for updates!</p>
+                <div class="gallery-container">
+                    <div class="gallery-item"><img src="anime.jpg" alt="Anime/Movie Streaming Project"><h4>ANIME / MOVIE STREAMING</h4></div>
+                    <div class="gallery-item"><img src="2.jpg" alt="Web3 Games Project"><h4>WEB3 GAMES</h4></div>
+                </div>
+            </div>
+        </div>
+        <div id="contact" class="page-content">
+            <div class="text-container">
+                <h2>Contact Me</h2>
+                <p style="text-align: center;">I'm open to discussions, collaborations, or just a friendly chat. Feel free to reach out through any of the platforms below.</p>
+                <div class="contact-links">
+                     <a href="mailto:anandiputriani610@gmail.com" class="contact-item"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline fill="none" stroke="currentColor" points="22,6 12,13 2,6"></polyline></svg><span>anandiputriani610@gmail.com</span></a>
+                     <a href="https://wa.me/6282168600891" target="_blank" class="contact-item"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.75 13.96c.25.13.4.38.4.66v.88c0 .41-.34.75-.75.75H7.6c-.41 0-.75-.34-.75-.75v-1.09c0-.28.15-.54.4-.66l.25-.13c.2-.1.44-.1.64.04l.48.34c.15.11.36.06.45-.1l.39-.68c.09-.16.03-.36-.12-.45l-.48-.34a.75.75 0 0 1-.04-1.13l.68-.39c.16-.09.36-.03.45.12l.34.48c.11.15.31.2.45.12l.68-.39a.75.75 0 0 1 1.13.04l.34.48c.09.16.29.21.45.12l.68-.39c.16-.09.36-.03.45.12l.39.68c.09.16.03-.36-.12-.45l-.48.34a.75.75 0 0 1-.64.04l-.25-.13zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg><span>+62 821 6860 0891</span></a>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const musicPrompt = document.getElementById('music-prompt');
+            const playButton = document.getElementById('play-music');
+            const noButton = document.getElementById('no-music');
+            const audio = document.getElementById('background-music');
+            if (musicPrompt) {
+                playButton.addEventListener('click', function() {
+                    audio.volume = 0.5;
+                    audio.play().catch(error => console.error("Audio play error:", error));
+                    musicPrompt.classList.add('hidden');
+                });
+                noButton.addEventListener('click', function() {
+                    musicPrompt.classList.add('hidden');
+                });
+            }
+            const volumeToggle = document.getElementById('volume-toggle');
+            const volumeSlider = document.getElementById('volume-slider');
+            if (volumeToggle && volumeSlider && audio) {
+                volumeToggle.addEventListener('click', function() {
+                    audio.muted = !audio.muted;
+                });
+                volumeSlider.addEventListener('input', function() {
+                    audio.volume = this.value;
+                    if (this.value > 0) {
+                        audio.muted = false;
+                    }
+                });
+                audio.onvolumechange = () => {
+                    if (audio.muted || audio.volume === 0) {
+                        volumeSlider.value = 0;
+                        volumeToggle.classList.add('muted');
+                    } else {
+                        volumeSlider.value = audio.volume;
+                        volumeToggle.classList.remove('muted');
+                    }
+                };
+            }
+            const sidebarLinks = document.querySelectorAll(".sidebar-nav a");
+            const contentPages = document.querySelectorAll(".page-content");
+            const menuItems = document.querySelectorAll(".sidebar-nav li");
+
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const targetId = link.dataset.target;
+                    const targetPage = document.getElementById(targetId);
+                    contentPages.forEach(page => page.classList.remove('active'));
+                    if (targetPage) targetPage.classList.add('active');
+                    menuItems.forEach(item => item.classList.remove('active'));
+                    link.parentElement.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
